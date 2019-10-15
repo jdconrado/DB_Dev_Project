@@ -9,9 +9,10 @@ app.set('port',process.env.PORT || 3000); // usar el puerto que le asigne el sis
 
 // Middlewares
 app.use(morgan('dev')); // Ayuda a entender las peticiones del cliente al servidor
-app.use(express.json());
+app.use(express.json()); // Hace que el servidor acepte los datos en json que vengan del navegador
 
 // Routes
+app.use('/REST/',require('./routes/initial'));
 
 //Starting the server
 app.listen(app.get('port'), ()=> {
