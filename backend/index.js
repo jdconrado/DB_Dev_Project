@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const path = require('path');
 
 const { mongoose} = require ('./db');
 
@@ -15,6 +16,13 @@ app.use(express.json()); // Hace que el servidor acepte los datos en json que ve
 app.use('/REST/',require('./routes/initial'));
 
 //Starting the server
+
+//app.use(express.static(path.join(__dirname, '../frontend/dist/frontend')));
+
+/*app.all('*', (req, res, next) => {
+    res.sendFile(path.resolve('./frontend/src/index.html'))
+});*/
+
 app.listen(app.get('port'), ()=> {
     console.log('Server on port', app.get('port') );
 });
