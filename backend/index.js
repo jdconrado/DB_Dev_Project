@@ -17,7 +17,7 @@ app.use('/REST/',require('./routes/initial'));
 
 //Starting the server
 
-//app.use(express.static(path.join(__dirname, '../frontend/dist/frontend')));
+app.use(express.static(path.join(__dirname, '../frontend/dist/frontend')));
 
 /*app.all('*', (req, res, next) => {
     res.sendFile(path.resolve('./frontend/src/index.html'))
