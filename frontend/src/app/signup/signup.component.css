@@ -1,0 +1,42 @@
+
+.container{
+    height: 100%;
+    align-content: center;
+    }
+    
+    .card{
+    height: 370px;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 400px;
+    background-color: rgba(0, 0, 0, 0.623) 
+    }
+    
+
+    .card-header h3{
+    color: white;
+    }
+    
+       .signup_btn{
+    color: white;
+    background-color: #02AAB0;
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    }
+    
+    .signup_btn:hover{
+    color: black;
+    background-color: white;
+    }
+    
+    .links{
+    color: white;
+    }
+    
+    .links a{
+    margin-left: 4px;
+    }
+   .a {
+      color: #02AAB0
+   }
