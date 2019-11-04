@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div *ngFor="let user of usuarios.slice(0, (usuarios.length+1)/2); index as j" class="container my-5">
+                <div class="d-flex justify-content-start">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-start">
+                            <h3>{{user.Name}}</h3>
+                        </div>
+                        <div class="cont card-body">
+                            <div id="{{j}}" class="carousel slide" data-ride="carousel">
+                                <div class=" carousel-inner">
+                                    <div *ngFor="let foto of fotos; index as i" class="carousel-item"
+                                        [ngClass]="{'active' : i == 0}">
+                                        <img class="d-block w-100 img" src="../../assets/{{foto.file}}"
+                                            alt="{{i}}">
+                                        <h4>Id: {{foto.id}}</h4>
+                                        <h5>Precio: {{foto.precio}}</h5>
+                                        <h5>Descripción: Empanada rellena de - </h5>
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#{{j}}" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#{{j}}" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div *ngFor="let user of usuarios.slice((usuarios.length+1)/2
+                , usuarios.length); index as j" class="container my-5">
+                <div class="container">
+                    <div class="d-flex justify-content-start">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-start">
+                                <h3>{{user.Name}}</h3>
+                            </div>
+                            <div class="card-body">
+                                <div id="{{j+usuarios.length}}" class="carousel slide" data-ride="carousel">
+                                    <div class=" carousel-inner">
+                                        <div *ngFor="let foto of fotos; index as i" class="carousel-item"
+                                            [ngClass]="{'active' : i == 0}">
+                                            <img class="d-block w-100" src="../../assets/{{foto.file}}" alt="{{i}}">
+                                            <h4>Id: {{foto.id}}</h4>
+                                            <h5>Precio: {{foto.precio}}</h5>
+                                            <h5>Descripción: Empanada rellena de - </h5>
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#{{j+usuarios.length}}" role="button"
+                                        data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#{{j+usuarios.length}}" role="button"
+                                        data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

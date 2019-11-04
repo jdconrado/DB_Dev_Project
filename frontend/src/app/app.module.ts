@@ -10,13 +10,16 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
 import { HomeComponent } from './home/home.component';
+import { ProductsComponent } from './products/products.component';
+import {VendorComponent } from './vendor/vendor.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent },
-  { path: '-', component: LoginComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'products', component: ProductsComponent },
+  { path: 'vendor', component: VendorComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
@@ -26,7 +29,9 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     SignupComponent,
-    HomeComponent
+    HomeComponent,
+    ProductsComponent,
+    VendorComponent
   ],
   imports: [
     BrowserModule,
