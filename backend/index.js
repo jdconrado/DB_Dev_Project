@@ -13,7 +13,7 @@ app.use(morgan('dev')); // Ayuda a entender las peticiones del cliente al servid
 app.use(express.json()); // Hace que el servidor acepte los datos en json que vengan del navegador
 
 // Routes
-app.use('/REST/',require('./routes/initial'));
+app.use('/USERS/',require('./routes/usersRoute'));
 
 //Starting the server
 
