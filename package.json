@@ -2,8 +2,9 @@
   "name": "DB_Dev_Project",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "backend/index.js",
   "scripts": {
+    "start": "cd backend && node index.js",
     "dev": "nodemon backend/index.js",
     "build_app": "cd frontend && ng build && cd .."
   },
