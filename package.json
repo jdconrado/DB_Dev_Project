@@ -4,7 +4,7 @@
   "description": "",
   "main": "backend/index.js",
   "scripts": {
-    "start": "cd frontend && ng build && cd .. && cd backend && node index.js",
+    "start": "cd frontend && npm install && ng build && cd .. && cd backend && node index.js",
     "dev": "nodemon backend/index.js",
     "build_app": "cd frontend && ng build && cd .."
   },
