@@ -6,7 +6,7 @@ const path = require('path');
 const { mongoose}  = require ('./db');
 
 // Settings
-app.set('port',process.env.PORT || 3000); // usar el puerto que le asigne el sistema, si este no agina alguno, usa el 3000
+app.set('port',process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080); // usar el puerto que le asigne el sistema, si este no agina alguno, usa el 8080
 
 // Middlewares
 app.use(morgan('dev')); // Ayuda a entender las peticiones del cliente al servidor
