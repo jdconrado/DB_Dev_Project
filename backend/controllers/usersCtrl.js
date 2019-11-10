@@ -7,26 +7,29 @@ usersCtrl.getData= async (req, res) => {
 
 usersCtrl.insertData = async (req, res)=>{
     console.log(req.body);
-    const {name, lastname, email, password, cpassword, phone, date, image}=req.body;
+    var {name, lastname, email, password, cpassword, phone, DateOfBirth, ImageID}=req.body;
     console.log(email);
+    phone = "";
+    DateOfBirth = new Date();
+    ImageID = "";
     if(password==cpassword){
-        const emU = usersModel.findOne({email:email});
+        const emU = await usersModel.findOne({email: email});
         if(emU){
-            console.log('email in use.');
+            console.log('Email in use.');
             //Redirect
-            return res.redirect('/USERS');
+            return res.redirect('/USERS/');
         }
-        let data = new usersModel({name, lastname, phone, email, date, image, password});
+        let data = new usersModel({name, lastname, phone, email, DateOfBirth, ImageID, password});
         data.password = await data.encryptPassword(password);
         console.log(data);
         await data.save();
         console.log('Datos guardados.');
-        return res.redirect("/USERS/Register");
+        return res.redirect("/USERS/");
         //Redirect
     }else{
         console.log("Contraseñas no iguales.");
-        return res.redirect("/USERS/Register");
-        //Redirect
+        return res.redirect("/USERS/");
+        //Redirect  
     }
 };
 
@@ -44,7 +47,7 @@ usersCtrl.login = async(req, res)=>{
         return res.redirect('/USERS/');
     }
    }else{
-       console.log("Errorr");
+       console.log("Error");
        return res.redirect('/USERS/');
    }
 };
