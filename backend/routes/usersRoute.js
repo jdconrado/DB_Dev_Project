@@ -3,8 +3,8 @@ const router = express.Router();
 
 const userCtrl = require('../controllers/usersCtrl');
 
-router.get('/Register', userCtrl.insertData);
-router.get('/Login', userCtrl.login);
-
+router.post('/Register', userCtrl.insertData);
+router.post('/Login', userCtrl.login);
+router.get('/profile', userCtrl.authT, userCtrl.tokenC);
 
 module.exports = router; 
