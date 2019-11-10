@@ -15,9 +15,10 @@ app.use(express.json()); // Hace que el servidor acepte los datos en json que ve
 // Routes
 app.use('/USERS/',require('./routes/usersRoute'));
 
-app.all('/*',express.static(path.join(__dirname, '../frontend/dist/frontend')), (req, res, next) => {
-    res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'))
-});
+//Comentado para probar
+//app.all('/*',express.static(path.join(__dirname, '../frontend/dist/frontend')), (req, res, next) => {
+  //  res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'))
+//});
 
 //Starting the server
 
