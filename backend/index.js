@@ -13,7 +13,13 @@ app.use(morgan('dev')); // Ayuda a entender las peticiones del cliente al servid
 app.use(express.json()); // Hace que el servidor acepte los datos en json que vengan del navegador
 
 // Routes
+app.use('/USERS/VENDORS/', require('./routes/vendorsRoute'));
 app.use('/USERS/',require('./routes/usersRoute'));
+app.use('/IMAGES/', require('./routes/imagesRoute'));
+app.use('/PRODUCTS/', require('./routes/productsRoute'));
+
+// Static Files 
+app.use('/uploads', express.static('uploads'));
 
 //Comentado para probar
 //app.all('/*',express.static(path.join(__dirname, '../frontend/dist/frontend')), (req, res, next) => {

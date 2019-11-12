@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { ProductsComponent } from './products/products.component';
 import {VendorComponent } from './vendor/vendor.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CatalogComponent } from './catalog/catalog.component';
+import { CatalogService } from './catalog/catalog.service';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,7 +35,8 @@ const routes: Routes = [
     HomeComponent,
     ProductsComponent,
     VendorComponent,
-    ProfileComponent
+    ProfileComponent,
+    CatalogComponent
   ],
   imports: [
     FormsModule,
@@ -41,7 +44,9 @@ const routes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    CatalogService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
