@@ -1,14 +1,24 @@
 const usersModel = require('../models/Users');
 const jwt = require('jsonwebtoken');
+let requests = require('request');
 const usersCtrl = {}
 
 usersCtrl.getData= async (req, res) => {
-    res.json(await usersModel.find());
+    let {name,lastname,phone,email,DateOfBirth,ImageID} = await usersModel.findById(req.params.id);
+    res.json({
+        "result":"Successful.",
+        name,
+        lastname,
+        phone,
+        email,
+        DateOfBirth,
+        ImageID
+    });
 }
 
 usersCtrl.insertData = async (req, res)=>{
     console.log(req.body);
-    var {name, lastname, email, password, cpassword, phone, DateOfBirth, ImageID}=req.body;
+    var {name, lastname, email, password, cpassword, phone, DateOfBirth, ImageID, vendor}=req.body;
     console.log(email);
     phone = "";
     DateOfBirth = new Date();
@@ -24,10 +34,15 @@ usersCtrl.insertData = async (req, res)=>{
         data.password = await data.encryptPassword(password);
         console.log(data);
         await data.save();
+        if(vendor.localeCompare("vendor")==0){
+            console.log("Im going to create");
+            var js={"userId": data.id};
+            await requests.post('http://localhost:8080/USERS/VENDORS/create', {json: js});
+        };
         var token = data.generateJwt();
         console.log(token);
         console.log('Datos guardados.');
-        return res.redirect("/USERS/");
+        return await res.redirect("/USERS/");
         //Redirect
     }else{
         console.log("Contraseñas no iguales.");
