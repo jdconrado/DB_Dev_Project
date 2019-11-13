@@ -40,7 +40,8 @@ spCtrl.fetchAll = async (req, res) =>{
 
 spCtrl.delete = async (req, res) =>{
     await spModel.deleteOne({_id: req.params.id});
-    await requests.delete("/PRODUCTS/delete/", body={SalesPersonId: _id} );
+
+    await requests.delete("/PRODUCTS/delete/", {json:{SalesPersonId: _id}} );
     res.json({
         "result":"Successful."
     });
