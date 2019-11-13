@@ -17,6 +17,9 @@ app.use('/USERS/VENDORS/', require('./routes/vendorsRoute'));
 app.use('/USERS/',require('./routes/usersRoute'));
 app.use('/IMAGES/', require('./routes/imagesRoute'));
 app.use('/PRODUCTS/', require('./routes/productsRoute'));
+app.use('/USERS/CLIENTS/', require('./routes/clientsRoute'));
+app.use('/USERS/VENDORS/BUSINESS', require('./routes/businessRoute'));
+
 
 // Static Files 
 app.use('/uploads', express.static('uploads'));

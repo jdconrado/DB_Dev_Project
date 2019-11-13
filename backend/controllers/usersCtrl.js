@@ -34,14 +34,14 @@ usersCtrl.insertData = async (req, res)=>{
         data.password = await data.encryptPassword(password);
         console.log(data);
         await data.save();
+        var js={"userId": data.id};
         if(vendor.localeCompare("vendor")==0){
-            console.log("Im going to create");
-            var js={"userId": data.id};
-            await requests.post('http://localhost:8080/USERS/VENDORS/create', {json: js});
+             requests.post('http://localhost:8080/USERS/VENDORS/create', {json: js});
         };
         var token = data.generateJwt();
         console.log(token);
         console.log('Datos guardados.');
+        requests.post('http://localhost:8080/USERS/CLIENTS/create', {json: js});
         return await res.redirect("/USERS/");
         //Redirect
     }else{
