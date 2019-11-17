@@ -13,12 +13,14 @@ export class UsersService {
   getUsers() {
     return this.http.get(`${this.BaseURL}/User/Register`).toPromise();
   }
-  PostUsers(user: User): Observable<any> {
+  async PostUsers(user: any): Promise<Observable<any>> {
     const json = JSON.stringify(user);
     const params = 'json=' + json;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    console.log(params);
+    console.log(json);
     console.log('LLEGÓ');
-    return this.http.post(`${this.BaseURL}/User/Register`, params, { headers });
+    return await this.http.post(`${this.BaseURL}/User/Register`, params, { headers });
   }
   private handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {

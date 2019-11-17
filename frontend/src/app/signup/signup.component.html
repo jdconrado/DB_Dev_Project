@@ -10,38 +10,38 @@
           </div>
           <div class="card-body">
             <h5 class="card-title text-center">Registrate</h5>
-            <form class="form-signin" (ngSubmit)="saveData(inputUserame, inputLName, Phone, inputEmail, birth, inputPassword, inputConfirmPassword, inputDesc)">
+            <form class="form-signin" #f="ngForm" (ngSubmit)="saveData(f)">
               <div class="form-label-group">
-                <input type="text" id="inputUserame" class="form-control" placeholder="Nombre" required autofocus>
-                <label for="inputUserame">Nombre</label>
+                <input [(ngModel)]="usuarios.name" name="name" type="text" id="inputName" class="form-control" placeholder="Nombre" required autofocus>
+                <label for="inputName">Nombre</label>
               </div>
               <div class="form-label-group">
-                <input type="text" id="inputLName" class="form-control" placeholder="Apellido" required autofocus>
+                <input [(ngModel)]="usuarios.lastname" name="lastname" type="text" id="inputLName" class="form-control" placeholder="Apellido" required autofocus>
                 <label for="inputLName">Apellido</label>
               </div>
               <div class="form-label-group">
-                <input type="text" id="Phone" class="form-control" placeholder="Telefono" required autofocus>
+                <input [(ngModel)]="usuarios.phone" name="phone" type="text" id="Phone" class="form-control" placeholder="Telefono" required autofocus>
                 <label for="Phone">Telefono Celular</label>
               </div>
               <div class="form-label-group">
-                <input type="email" id="inputEmail" class="form-control" placeholder="Dirección de correo electrónico"
+                <input [(ngModel)]="usuarios.email" name="email" type="email" id="inputEmail" class="form-control" placeholder="Dirección de correo electrónico"
                   required>
                 <label for="inputEmail">Correo</label>
               </div>
               <div class="form-label-group">
-                  <input type="date" id="birth" class="form-control" placeholder="Fecha de cumpleaños"
+                  <input [(ngModel)]="usuarios.DateOfBirth" name="birth" type="date" id="birth" class="form-control" placeholder="Fecha de cumpleaños"
                     required>
                   <label for="birth">Fecha de cumpleaños</label>
                 </div>
               <hr>
 
               <div class="form-label-group">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input [(ngModel)]="usuarios.password" name="pw" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
                 <label for="inputPassword">Contraseña</label>
               </div>
 
               <div class="form-label-group">
-                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+                <input  name="pw2"  type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
                 <label for="inputConfirmPassword">Repite la contraseña</label>
               </div>
               <div class="form-group">
