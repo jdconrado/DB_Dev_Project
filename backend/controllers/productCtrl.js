@@ -13,7 +13,8 @@ productCtrl.create = async(req, res) => {
 productCtrl.modify = async (req, res) =>{
     await prdtModel.updateOne(
         {_id: req.params.id},
-        {$set: req.body}
+        {$set: req.body},
+        {strict:false}
     );
     res.json({
         "result":"Successful."
