@@ -4,23 +4,24 @@ const rtCtrl = {};
 let requests = require('request');
 
 rtCtrl.createData = async (req, res) =>{
-    let fdate=new Date();
+    let date=new Date();
     let entityId = req.params.id;
-    let time = fdate.getHours()+":"+fdate.getMinutes()+":"+fdate.getSeconds();
+    let time = date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
     const found = await rtModel.findOne({userId: req.body.userId, entityId: entityId});
-    let {rating, entityType, userId}=req.body;
+    let {rating, entityType, userId, commentId}=req.body;
     if(found){
         res.json({
             "status":"Already rated by this user."
         });
     }else{
         let data = new rtModel({
-            'fdate':fdate,
+            'date':date,
             'time':time,
             'rating':rating,
             'entityType':entityType,
             'entityId':entityId,
-            'userId':userId
+            'userId':userId,
+            'commentId':commentId
         });
         await data.save();
         var js={"rating":rating};

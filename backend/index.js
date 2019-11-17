@@ -20,6 +20,7 @@ app.use('/PRODUCTS/', require('./routes/productsRoute'));
 app.use('/USERS/CLIENTS/', require('./routes/clientsRoute'));
 app.use('/USERS/VENDORS/BUSINESS', require('./routes/businessRoute'));
 app.use('/USERS/RATING/', require('./routes/ratingRoute'));
+app.use('/COMMENTS/', require('./routes/commentRoute'));
 
 
 // Static Files 
