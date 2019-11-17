@@ -1,54 +1,68 @@
 <!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
+
 <body>
-<div class="container">
-<div class="row">
-  <div class="col-lg-10 col-xl-9 mx-auto">
-    <div class="card card-signin flex-row my-5">
-      <div class="card-img-left d-none d-md-flex">
-         <!-- Background image for card set in CSS! -->
-      </div>
-      <div class="card-body">
-        <h5 class="card-title text-center">Registrate</h5>
-        <form class="form-signin">
-          <div class="form-label-group">
-            <input type="text" id="inputUserame" class="form-control" placeholder="Username" required autofocus>
-            <label for="inputUserame">Nombre</label>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-signin flex-row my-5">
+          <div class="card-img-left d-none d-md-flex">
+            <!-- Background image for card set in CSS! -->
           </div>
+          <div class="card-body">
+            <h5 class="card-title text-center">Registrate</h5>
+            <form class="form-signin" (ngSubmit)="saveData(inputUserame, inputLName, Phone, inputEmail, birth, inputPassword, inputConfirmPassword, inputDesc)">
+              <div class="form-label-group">
+                <input type="text" id="inputUserame" class="form-control" placeholder="Nombre" required autofocus>
+                <label for="inputUserame">Nombre</label>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="inputLName" class="form-control" placeholder="Apellido" required autofocus>
+                <label for="inputLName">Apellido</label>
+              </div>
+              <div class="form-label-group">
+                <input type="text" id="Phone" class="form-control" placeholder="Telefono" required autofocus>
+                <label for="Phone">Telefono Celular</label>
+              </div>
+              <div class="form-label-group">
+                <input type="email" id="inputEmail" class="form-control" placeholder="Dirección de correo electrónico"
+                  required>
+                <label for="inputEmail">Correo</label>
+              </div>
+              <div class="form-label-group">
+                  <input type="date" id="birth" class="form-control" placeholder="Fecha de cumpleaños"
+                    required>
+                  <label for="birth">Fecha de cumpleaños</label>
+                </div>
+              <hr>
 
-          <div class="form-label-group">
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required>
-            <label for="inputEmail">Correo</label>
-          </div>
-          
-          <hr>
+              <div class="form-label-group">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <label for="inputPassword">Contraseña</label>
+              </div>
 
-          <div class="form-label-group">
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <label for="inputPassword">Contraseña</label>
+              <div class="form-label-group">
+                <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
+                <label for="inputConfirmPassword">Repite la contraseña</label>
+              </div>
+              <div class="form-group">
+
+                <select class="form-control" name="hola" id="exampleFormControlSelect" (click)="myFunction($event)">
+                  <option value="" disabled selected>Seleccione el tipo de usuario</option>
+                  <option value="cliente">Cliente</option>
+                  <option value="vendedor">Vendedor</option>
+                </select>
+              </div>
+              <div class="form-group" *ngIf="show">
+                <label for="inputDesc">Escriba aqui una descripción general de lo que vende</label>
+                <textarea class="form-control" id="InputDesc" rows="3" required></textarea>
+              </div>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrar</button>
+              <a class="d-block text-center mt-2 small" routerLinkActive="active-link" [routerLink]="['/login']">Inicia
+                sesión</a>
+            </form>
           </div>
-          
-          <div class="form-label-group">
-            <input type="password" id="inputConfirmPassword" class="form-control" placeholder="Password" required>
-            <label for="inputConfirmPassword">Repite la contraseña</label>
-          </div>
-          <div class="form-group">
-          
-            <select class="form-control" name="hola" id="exampleFormControlSelect" (click)="myFunction($event)">
-              <option value="" disabled selected>Seleccione el tipo de usuario</option>
-              <option value="cliente">Cliente</option>
-              <option value="vendedor">Vendedor</option>
-            </select>
-          </div>
-          <div class="form-group" *ngIf="show">
-            <label for="exampleFormControlTextarea1">Escriba aqui una descripción general de lo que vende</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
-          </div>
-          <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrar</button>
-          <a class="d-block text-center mt-2 small" routerLinkActive="active-link" [routerLink]="['/login']">Inicia sesión</a>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
-</div>
 </body>
