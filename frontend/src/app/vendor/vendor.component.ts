@@ -11,17 +11,18 @@ export class VendorComponent implements OnInit {
   usuarios = USUARIOS;
   fotos = FOTOS;
   usuario: any;
-  constructor(private usuarioss: UsersService) {
+  constructor(private userService: UsersService) {
     this.usuario = [];
 
   }
 
   ngOnInit() {
-    this.usuarioss.getUsers()
-      .then((resultado: any) => {
-        this.usuario = resultado;
-      })
-      .catch(err => console.log('Error', err));
+   this.update();
   }
 
+  update(){
+    this.usuario = this.userService.getAllVendors();
+    console.log(this.usuario);
+    
+  }
 }

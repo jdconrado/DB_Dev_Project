@@ -14,7 +14,10 @@ import {VendorComponent } from './vendor/vendor.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CatalogService } from './catalog/catalog.service';
+import { UsersService } from './users.service';
+import { AuthenticationService } from './authentication.service'
 import { HttpClientModule } from '@angular/common/http';
+import { from } from 'rxjs';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -47,7 +50,9 @@ const routes: Routes = [
     HttpClientModule
   ],
   providers: [
-    CatalogService
+    CatalogService,
+    UsersService,
+    AuthenticationService
   ],
   bootstrap: [AppComponent]
 })

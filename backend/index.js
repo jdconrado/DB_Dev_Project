@@ -11,15 +11,20 @@ app.set('port',process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080); /
 // Middlewares
 app.use(morgan('dev')); // Ayuda a entender las peticiones del cliente al servidor
 app.use(express.json()); // Hace que el servidor acepte los datos en json que vengan del navegador
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // Routes
-app.use('/USERS/VENDORS/', require('./routes/vendorsRoute'));
-app.use('/USERS/',require('./routes/usersRoute'));
 app.use('/IMAGES/', require('./routes/imagesRoute'));
 app.use('/PRODUCTS/', require('./routes/productsRoute'));
+app.use('/USERS/VENDORS/', require('./routes/vendorsRoute'));
 app.use('/USERS/CLIENTS/', require('./routes/clientsRoute'));
 app.use('/USERS/VENDORS/BUSINESS', require('./routes/businessRoute'));
 app.use('/USERS/RATING/', require('./routes/ratingRoute'));
+app.use('/USERS/',require('./routes/usersRoute'));
 app.use('/COMMENTS/', require('./routes/commentRoute'));
 
 

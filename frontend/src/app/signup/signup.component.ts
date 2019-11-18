@@ -20,7 +20,9 @@ export class SignupComponent implements OnInit {
       phone: '',
       email: '',
       DateOfBirth: '',
-      password: ''
+      password: '',
+      cpassword:'',
+      vendor: null
     };
   }
 
@@ -31,9 +33,11 @@ export class SignupComponent implements OnInit {
     console.log(this.show);
     if (event.srcElement.value === 'cliente') {
       this.show = false;
+      this.usuarios.vendor = false;
     }
     if (event.srcElement.value === 'vendedor') {
       this.show = true;
+      this.usuarios.vendor = true;
     }
   }
 
@@ -42,10 +46,14 @@ export class SignupComponent implements OnInit {
 
   saveData(form: NgForm): void {
 
-
+    // falta verificar que si hayan puesto todos los datos
     console.log(this.usuarios);
-
-    this.uservice.PostUsers(this.usuarios);
+    if(this.usuarios.password === this.usuarios.cpassword){
+      this.uservice.registerUser(this.usuarios);
+    }else{
+      console.log('Las constraseñas no coinciden')
+    }
+    
   }
 
 }
