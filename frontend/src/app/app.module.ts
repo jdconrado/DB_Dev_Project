@@ -17,7 +17,7 @@ import { CatalogService } from './catalog/catalog.service';
 import { UsersService } from './users.service';
 import { AuthenticationService } from './authentication.service'
 import { HttpClientModule } from '@angular/common/http';
-import { from } from 'rxjs';
+import { OrderComponent } from './order/order.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -26,6 +26,7 @@ const routes: Routes = [
   { path: 'products', component: ProductsComponent },
   { path: 'vendor', component: VendorComponent },
   { path: 'profile/:id', component: ProfileComponent },
+  { path: 'order', component: OrderComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -40,7 +41,8 @@ const routes: Routes = [
     ProductsComponent,
     VendorComponent,
     ProfileComponent,
-    CatalogComponent
+    CatalogComponent,
+    OrderComponent
   ],
   imports: [
     FormsModule,
