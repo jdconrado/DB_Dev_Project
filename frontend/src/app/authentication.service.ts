@@ -7,9 +7,11 @@ import { Router } from '@angular/router';
 })
 export class AuthenticationService {
 
-  private token : string;
+  private token: string;
+  sw: boolean;
+  constructor(private http: HttpClient, private router: Router) {
 
-  constructor(private http: HttpClient, private router: Router) {}
+  }
 
   public saveToken(token: string): void {
     localStorage.setItem('UComm-token', token);
@@ -29,22 +31,20 @@ export class AuthenticationService {
     this.router.navigate(['/login']);
   }
 
-  public isTokenValid() : boolean { //Checa si el token aún no expira
-
+  public isTokenValid(): boolean { // Checa si el token aún no expira
     let payload;
-    if (this.getToken){
 
+
+    if (this.getToken) {
       payload = this.token.split('.')[1];
       payload = window.atob(payload);
       payload = JSON.parse(payload);
-
       return payload.exp > Date.now() / 1000;
-
-    }else{
-      //No hay ninguna sesión iniciada.
+    } else {
+      // No hay ninguna sesión iniciada.
       this.router.navigate(['/login']);
       return false;
     }
-  }
 
+  }
 }

@@ -13,16 +13,12 @@ export class VendorComponent implements OnInit {
   usuario: any;
   constructor(private userService: UsersService) {
     this.usuario = [];
-
   }
-
   ngOnInit() {
-   this.update();
+    this.update();
   }
-
-  update(){
+  update() {
     this.usuario = this.userService.getAllVendors();
     console.log(this.usuario);
-    
   }
 }
