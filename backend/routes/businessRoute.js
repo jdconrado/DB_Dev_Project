@@ -4,8 +4,8 @@ const router = express.Router();
 const bsnCtrl = require('../controllers/businessCtrl');
 
 router.post('/create', bsnCtrl.create);
-router.get('/Info/:id', bsnCtrl.create);
-router.put('/bought/:id', bsnCtrl.bought);
+router.get('/Info/:id', bsnCtrl.getData);
 router.put('/Rate/:id', bsnCtrl.getRated);
+router.get('/fetch/', bsnCtrl.fetchAll);
 
 module.exports = router;
