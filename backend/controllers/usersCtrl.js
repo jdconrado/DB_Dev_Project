@@ -3,13 +3,17 @@ let requests = require('request');
 const usersCtrl = {}
 
 usersCtrl.getData= async (req, res) => {
-    let {name,lastname} = await usersModel.findById(req.params.id);
+    let {name,lastname,phone,email,DateOfBirth,ImageID} = await usersModel.findById(req.params.id);
     if(name){
         res.json({
             "result":"Successful.",
             "data": {
                 name,
-                lastname
+                lastname,
+                phone,
+                email,
+                DateOfBirth,
+                ImageID
             }
         });
     }else{
