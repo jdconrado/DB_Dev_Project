@@ -10,6 +10,14 @@ productCtrl.create = async(req, res) => {
     });
 };
 
+productCtrl.getProAll = async(req, res)=>{
+    let data = await prdtModel.find({SalesPersonId: req.body.SalesPersonId});
+        res.json({
+            data
+        });
+
+}
+
 productCtrl.modify = async (req, res) =>{
     await prdtModel.updateOne(
         {_id: req.params.id},
