@@ -7,12 +7,18 @@
         <img height="36" width="159" src="../../assets/Header.png">
     </a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ml-auto text-center">
+        <div class="navbar-nav ml-auto text-center" *ngIf="!this.head.sw">
             <a class="nav-item nav-link mx-2" routerLinkActive="active-link"  [routerLink]="['/home']"> Home </a>
             <a class="nav-item nav-link mx-2" routerLinkActive="active-link"  [routerLink]="['/products']">Products</a>
             <a class="nav-item nav-link mx-2" routerLinkActive="active-link" [routerLink]="['/vendor']">Vendedores</a>
             <a class="nav-item nav-link mx-2" routerLinkActive="active-link" [routerLink]="['/login']"> Sign In </a>
             <a class="nav-item nav-link mx-2" routerLinkActive="active-link"  [routerLink]="['/signup']"> Sign up </a>
+        </div>
+        <div class="navbar-nav ml-auto text-center"  *ngIf="this.head.sw">
+            <a class="nav-item nav-link mx-2" routerLinkActive="active-link"  [routerLink]="['/home']"> Home </a>
+            <a class="nav-item nav-link mx-2" routerLinkActive="active-link"  [routerLink]="['/products']">Products</a>
+            <a class="nav-item nav-link mx-2" routerLinkActive="active-link" [routerLink]="['/vendor']">Vendedores</a>
+            <a class="nav-item nav-link mx-2" routerLinkActive="active-link" [routerLink]="['/home']"> Log Out </a>
         </div>
     </div>
 </nav>
