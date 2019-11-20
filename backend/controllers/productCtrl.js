@@ -12,10 +12,9 @@ productCtrl.create = async(req, res) => {
 
 productCtrl.getProAll = async(req, res)=>{
     let data = await prdtModel.find({SalesPersonId: req.body.SalesPersonId});
-        res.json({
-            data
-        });
-
+    res.json({
+        data
+    });
 }
 
 productCtrl.modify = async (req, res) =>{
