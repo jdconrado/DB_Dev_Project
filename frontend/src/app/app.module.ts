@@ -18,6 +18,7 @@ import { UsersService } from './users.service';
 import { AuthenticationService } from './authentication.service'
 import { HttpClientModule } from '@angular/common/http';
 import { OrderComponent } from './order/order.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'vendor', component: VendorComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'order', component: OrderComponent },
+  { path: 'pedidos', component: PedidosComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -42,7 +44,8 @@ const routes: Routes = [
     VendorComponent,
     ProfileComponent,
     CatalogComponent,
-    OrderComponent
+    OrderComponent,
+    PedidosComponent
   ],
   imports: [
     FormsModule,

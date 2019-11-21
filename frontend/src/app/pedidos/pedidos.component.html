@@ -1,0 +1,60 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<div class="container wrapper">
+    <div class="cart-body">
+        <form class="form-horizontal">
+            <div>
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Pedidos
+                    </div>
+                    <div class="panel-body">
+                        <div *ngFor="let item of array; index as j">
+                            <div class="form-group">
+                                <div class="col-sm-12 col-xs-12">
+                                    <div class="col-xs-12 my-2">Estado:
+                                        <div class="pull-right">
+                                            {{item.estado}}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 my-2">Nombre del cliente:
+                                        <div class="pull-right">
+                                            {{item.cliente}}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 my-2">Telefono celular del cliente:
+                                        <div class="pull-right">
+                                            {{item.phonec}}
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 my-2">Productos:</div>
+                                    <div class="col-xs-12 my-2" *ngFor="let prod of products; index as i">Producto
+                                        {{(i+1)}}:<div class="col-xs-12 my-2">Nombre producto:
+                                            <div class="pull-right">
+                                                {{prod.nombre}}
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 my-2">Precio:
+                                            <div class="pull-right">
+                                                {{prod.precio}}
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12 my-2">Cantidad:
+                                            <div class="pull-right">
+                                                {{prod.cantidad}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

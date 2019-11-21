@@ -46,6 +46,15 @@ body{
     background-color: cornflowerblue;
     cursor: pointer;
 }
+.profile-edi-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    background-color: rgb(0, 255, 76);
+    cursor: pointer;
+}
 .proile-rating{
     font-size: 12px;
     color: #818182;
