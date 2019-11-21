@@ -10,7 +10,8 @@ const usersModel = new Schema({
     email: {type: String, required: true, unique: true},
     DateOfBirth: {type: Date, required: false},
     ImageID: {type: String, required: false},
-    password: {type: String, required: true}
+    password: {type: String, required: true},
+    vendor: {type:Boolean, required: true}
 });
 usersModel.methods.encryptPassword = async (password) =>{
     const salt = await bcrypt.genSalt(10);
