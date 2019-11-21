@@ -30,10 +30,6 @@ usersCtrl.getData= async (req, res) => {
 usersCtrl.insertData = async (req, res)=>{
     try{
         var {name, lastname, email, password, cpassword, phone, DateOfBirth, ImageID, vendor}=req.body;
-<<<<<<< HEAD
-        
-=======
->>>>>>> dcd20b417904e650b9f70722659ab5623cbc507e
         DateOfBirth = new Date();
         ImageID = "";
         if(password==cpassword){

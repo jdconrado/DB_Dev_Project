@@ -54,8 +54,7 @@ export class AuthenticationService {
         payload = this.token.split('.')[1];
         payload = window.atob(payload);
         payload = JSON.parse(payload);
-        console.log("payload");
-        console.log(payload);
+
         return payload._id;
       } else {
         console.log("No existe")
