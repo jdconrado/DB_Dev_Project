@@ -9,8 +9,7 @@
 <div class="container emp-profile" *ngFor="let user of usuarios; index as j">
     <form method="post">
         <div class="row">
-            <div class="col-md-4 col-sm-12">
-
+            <div class="col-md-4 col-sm-12" *ngIf="this.user.vendor">
                 <h4>CAROUSEL PRODUCTOS</h4>
             </div>
             <div class="col-md-4 col-sm-12">
