@@ -1,7 +1,6 @@
 const spModel = require('../models/SalesPerson');
-const spCtrl = {};
-
 let requests = require('request');
+const spCtrl = {};
 
 spCtrl.create = async (req, res) =>{
     let data = new spModel(req.body);
@@ -13,11 +12,22 @@ spCtrl.create = async (req, res) =>{
 };
 
 spCtrl.modify = async (req, res) =>{
-    await spModel.updateOne(
-        {_id: req.params.id},
-        {$set: req.body},
+    let data = await spModel.findById(req.params.id);
+    let description = req.body.description;
+    await data.updateOne(
+        {description: description},
         {strict:false}
     );
+    await data.save();
+    var js={
+        "userId":data.userId,
+        "name":req.body.name, 
+        "lastname":req.body.lastname, 
+        "email":req.body.email, 
+        "phone":req.body.phone, 
+        "DateOfBirth":req.body.DateOfBirth, 
+        "ImageID":req.body.ImageID}
+    requests.post('http://localhost:8080/USERS/modify', {json: js});
     res.json({
         "result":"Successful."
     });

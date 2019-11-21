@@ -3,7 +3,7 @@ let requests = require('request');
 const usersCtrl = {}
 
 usersCtrl.getData= async (req, res) => {
-    let {name,lastname,phone,email,DateOfBirth,ImageID} = await usersModel.findById(req.params.id);
+    let {name,lastname,phone,email,DateOfBirth,ImageID, vendor} = await usersModel.findById(req.params.id);
     if(name){
         res.json({
             "result":"Successful.",
@@ -13,7 +13,8 @@ usersCtrl.getData= async (req, res) => {
                 phone,
                 email,
                 DateOfBirth,
-                ImageID
+                ImageID,
+                vendor
             }
         });
     }else{
@@ -29,7 +30,10 @@ usersCtrl.getData= async (req, res) => {
 usersCtrl.insertData = async (req, res)=>{
     try{
         var {name, lastname, email, password, cpassword, phone, DateOfBirth, ImageID, vendor}=req.body;
+<<<<<<< HEAD
         
+=======
+>>>>>>> dcd20b417904e650b9f70722659ab5623cbc507e
         DateOfBirth = new Date();
         ImageID = "";
         if(password==cpassword){
@@ -41,7 +45,7 @@ usersCtrl.insertData = async (req, res)=>{
                     "error": "Email en uso."
                 });
             }
-            let data = new usersModel({name, lastname, phone, email, DateOfBirth, ImageID, password});
+            let data = new usersModel({name, lastname, phone, email, DateOfBirth, ImageID, password, vendor});
             data.password = await data.encryptPassword(password);
             await data.save();
             var js={"userId": data.id};
@@ -64,6 +68,33 @@ usersCtrl.insertData = async (req, res)=>{
         });
     }
 };
+
+usersCtrl.modify=async(req, res)=>{
+    var {userId, name, lastname, email, phone, DateOfBirth, ImageID} = req.body;
+    let data = await usersModel.findById(userId);
+    await data.updateOne(
+        {name: name},
+        {strict: false});
+    await data.updateOne(
+        {lastname: lastname},
+        {strict: false});    
+    await data.updateOne(
+        {email: email},
+        {strict: false});
+    await data.updateOne(
+        {phone: phone},
+        {strict: false});
+    await data.updateOne(
+        {DateOfBirth: DateOfBirth},
+        {strict: false});
+    await data.updateOne(
+        {ImageId: ImageID},
+        {strict: false});
+    await data.save();
+    res.json({
+        "result":"Successful."
+    });
+}
 
 usersCtrl.login = async(req, res)=>{
    console.log(req.body);
