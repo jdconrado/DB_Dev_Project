@@ -17,11 +17,9 @@ export class UsersService {
     }),
   };
 
-  constructor(private http: HttpClient, private router: Router, private auth: AuthenticationService) { }
-
-  public getUsers() {
-    return this.http.get(`${this.BaseURL}/USERS/register`);
+  constructor(private http: HttpClient, private router: Router, private auth: AuthenticationService) {
   }
+
 
   public registerUser(user: any) {
 
@@ -81,9 +79,15 @@ export class UsersService {
           });
         });
       });
-
     });
     return res;
   }
-
+  public getUser(id: any): any {
+    let res = [];
+    this.http.get(`${this.BaseURL}/USERS/info/${id}`, this.httpOptions).subscribe((userData) => {
+      res.push(userData["data"]);
+    });
+    console.log(res);
+    return res;
+  }
 }

@@ -18,7 +18,8 @@
             <a class="nav-item nav-link mx-2" routerLinkActive="active-link"  [routerLink]="['/home']"> Home </a>
             <a class="nav-item nav-link mx-2" routerLinkActive="active-link"  [routerLink]="['/products']">Products</a>
             <a class="nav-item nav-link mx-2" routerLinkActive="active-link" [routerLink]="['/vendor']">Vendedores</a>
-            <a class="nav-item nav-link mx-2" routerLinkActive="active-link" [routerLink]="['/home']"> Log Out </a>
+            <a class="nav-item nav-link " routerLinkActive="active-link" [routerLink]="['/profile', this.head.getUserID()]">Mi Perfil</a>
+            <a class="nav-item nav-link mx-2" routerLinkActive="active-link" (click)="this.head.logout()"> Log Out </a>
         </div>
     </div>
 </nav>

@@ -3,18 +3,18 @@
         <h1>HOLA</h1>
     </a>
     <div *ngFor="let userr of usuario">
-        <h3>{{userr}}</h3>
+        <h3>{{userr.vendorDetails._id}}</h3>
     </div>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-            <div *ngFor="let user of usuarios.slice(0, (usuarios.length+1)/2); index as j" class="container my-5">
+            <div *ngFor="let user of usuario.slice(0, (usuario.length+1)/2); index as j" class="container my-5">
                 <div class="d-flex justify-content-start">
                     <div class="card">
                         <div class="card-header d-flex justify-content-start">
-                            <a [routerLink]="['/profile',j]">{{user.name}}</a>
+                            <a [routerLink]="['/profile',user.vendorDetails.userId]">{{user.name}} {{user.lastName}}</a>
                         </div>
                         <div class="cont card-body">
                             <div id="{{j}}" class="carousel slide" data-ride="carousel">
@@ -45,13 +45,13 @@
 
         </div>
         <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-            <div *ngFor="let user of usuarios.slice((usuarios.length+1)/2
-                , usuarios.length); index as j" class="container my-5">
+            <div *ngFor="let user of usuario.slice((usuario.length+1)/2
+                , usuario.length); index as j" class="container my-5">
                 <div class="container">
                     <div class="d-flex justify-content-start">
                         <div class="card">
                             <div class="card-header d-flex justify-content-start">
-                                <a [routerLink]="['/profile',j+(usuarios.length+1)/2]">{{user.name}}</a>
+                                <a [routerLink]="['/profile',user.vendorDetails.userId]">{{user.name}}</a>
                             </div>
                             <div class="card-body">
                                 <div id="{{j+usuarios.length}}" class="carousel slide" data-ride="carousel">
