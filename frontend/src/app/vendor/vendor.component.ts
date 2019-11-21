@@ -12,7 +12,7 @@ export class VendorComponent implements OnInit {
   fotos = FOTOS;
   usuario: any;
   constructor(private userService: UsersService) {
-    this.usuario = [];
+
   }
   ngOnInit() {
     this.update();

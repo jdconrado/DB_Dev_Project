@@ -10,7 +10,7 @@ export class AuthenticationService {
   private token: string;
   sw: boolean;
   constructor(private http: HttpClient, private router: Router) {
-
+    this.token = '';
   }
 
   public saveToken(token: string): void {
@@ -29,16 +29,16 @@ export class AuthenticationService {
     this.token = '';
     window.localStorage.removeItem('UComm-token');
     this.router.navigate(['/login']);
+    this.sw = false;
   }
 
   public isTokenValid(): boolean { // Checa si el token aún no expira
     let payload;
-
-
     if (this.getToken) {
       payload = this.token.split('.')[1];
       payload = window.atob(payload);
       payload = JSON.parse(payload);
+
       return payload.exp > Date.now() / 1000;
     } else {
       // No hay ninguna sesión iniciada.
@@ -46,5 +46,21 @@ export class AuthenticationService {
       return false;
     }
 
+  }
+  public getUserID() {
+    if (this.token !== '') {
+      let payload;
+      if (this.getToken) {
+        payload = this.token.split('.')[1];
+        payload = window.atob(payload);
+        payload = JSON.parse(payload);
+        console.log("payload");
+        console.log(payload);
+        return payload._id;
+      } else {
+        console.log("No existe")
+      }
+      return null;
+    }
   }
 }
