@@ -11,6 +11,14 @@ spCtrl.create = async (req, res) =>{
     });
 };
 
+spCtrl.giveId = async (req, res)=>{
+    let data = await spModel.find({userId:req.params.id});
+    res.json({
+        "result":"Successful.",
+        "id":data._id
+    });
+}
+
 spCtrl.modify = async (req, res) =>{
     let data = await spModel.findById(req.params.id);
     let description = req.body.description;
