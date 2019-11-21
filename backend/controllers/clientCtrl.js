@@ -19,7 +19,7 @@ clientCtrl.getData = async(req, res)=>{
       });
 };
 
-spCtrl.giveId = async (req, res)=>{
+clientCtrl.giveId = async (req, res)=>{
   let data = await cltModel.find({userId:req.params.id});
   res.json({
       "result":"Successful.",

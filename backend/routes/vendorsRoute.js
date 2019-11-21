@@ -5,6 +5,7 @@ const vendorCtrl = require('../controllers/vendorsCtrl');
 
 router.post('/create', vendorCtrl.create);
 router.get('/fetch/', vendorCtrl.fetchAll);
+router.get('/giveid/:id',vendorCtrl.giveId);
 router.post('/modify/:id',vendorCtrl.modify);
 router.get('/fetch/:id', vendorCtrl.fetch);
 router.put('/update/:id', vendorCtrl.modify);
