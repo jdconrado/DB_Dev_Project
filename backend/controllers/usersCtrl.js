@@ -29,7 +29,7 @@ usersCtrl.getData= async (req, res) => {
 
 usersCtrl.insertData = async (req, res)=>{
     try{
-        var {name, lastname, email, password, cpassword, phone, DateOfBirth, ImageID, vendor}=req.body;
+        var {name, lastname, email, description, password, cpassword, phone, DateOfBirth, ImageID, vendor}=req.body;
         DateOfBirth = new Date();
         ImageID = "";
         if(password==cpassword){
@@ -44,7 +44,7 @@ usersCtrl.insertData = async (req, res)=>{
             let data = new usersModel({name, lastname, phone, email, DateOfBirth, ImageID, password, vendor});
             data.password = await data.encryptPassword(password);
             await data.save();
-            var js={"userId": data.id};
+            var js={"userId": data.id, "description": description};
             if(vendor == true){
                 requests.post('http://localhost:8080/USERS/VENDORS/create', {json: js});
             }else{
