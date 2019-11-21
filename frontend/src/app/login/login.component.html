@@ -25,6 +25,11 @@
   
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit" (click) = "login()" >Iniciar Sesión</button>
             <a class="d-block text-center mt-2 small" routerLinkActive="active-link"  [routerLink]="['/signup']">Registrate</a>
+            <div class="alert alert-danger my-3" role="alert" *ngIf="this.userService.error" >
+                <div>
+                  Correo electrónico y/o contraseña incorrectos
+                </div>
+              </div>
           </form>
         </div>
       </div>

@@ -14,22 +14,24 @@ import { FOTOS } from '../vendor/fotos';
 export class ProfileComponent implements OnInit {
   fotos: any;
   usuarios: any;
+  descripcion: any;
   id: any;
   param: any;
   constructor(
     private ruta: ActivatedRoute, private users: UsersService, private auth: AuthenticationService
   ) {
-    this.fotos=
-    this.id = '';
+    this.fotos =
+      this.id = '';
     if (this.auth.isTokenValid) {
       this.id = this.auth.getUserID();
     }
     this.ruta.params.subscribe(params => {
       this.param = params.id;
       this.usuarios = this.users.getUser(params.id);
-      console.log("knauo");
-      console.log(this.usuarios);
+      this.descripcion = this.users.getVendors(this.param);
     });
+
+
   }
 
   ngOnInit() {

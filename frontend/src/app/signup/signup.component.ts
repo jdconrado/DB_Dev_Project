@@ -66,11 +66,8 @@ export class SignupComponent implements OnInit {
       this.uservice.registerUser(this.usuarios);
     } else {
       console.log("Form no valido");
-      this.Error();
+      
     }
   }
-  Error(): void {
-    this.error = true;
-    setTimeout(() => { this.error = false; }, 4000)
-  }
+  
 }

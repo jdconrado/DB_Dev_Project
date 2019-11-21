@@ -8,7 +8,7 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class UsersService {
-
+  error: any;
   private BaseURL = 'http://localhost:8080';
 
   private httpOptions = {
@@ -18,6 +18,7 @@ export class UsersService {
   };
 
   constructor(private http: HttpClient, private router: Router, private auth: AuthenticationService) {
+    this.error = false;
   }
 
 
@@ -42,8 +43,10 @@ export class UsersService {
       if ((data["result"] as string).includes("Successful")) {
         this.auth.saveToken(data['token']);
         this.router.navigate(['/home']);
+        this.error = false;
       } else {
         console.log('Hubo un error mano');
+        this.error = true;
         // Mostrar alerta de error de login no correcto
       }
       this.auth.sw = this.auth.isTokenValid();
@@ -82,12 +85,39 @@ export class UsersService {
     });
     return res;
   }
+
+  public getVendors(id: any): any {
+    let res = [];
+    this.http.get(`${this.BaseURL}/USERS/VENDORS/fetch`, this.httpOptions).subscribe((data) => {
+      data["data"].forEach(vendor => {
+        if (vendor["userId"] === id) {
+          this.http.get(`${this.BaseURL}/USERS/info/${id}`, this.httpOptions).subscribe((userData) => {
+            res.push({
+              name: userData["data"]["name"],
+              lastName: userData["data"]["lastname"],
+              vendorDetails: vendor
+            });
+          });
+        }
+      });
+    });
+    return res;
+  }
+
+  public getVendorId(id: any): any {
+    let res = [];
+    this.http.get(`${this.BaseURL}/USERS/vendors/giveid/${id}`, this.httpOptions).subscribe((userData) => {
+      res.push(userData["data"]);
+    });
+    console.log(res);
+    return res;
+  }
+
   public getUser(id: any): any {
     let res = [];
     this.http.get(`${this.BaseURL}/USERS/info/${id}`, this.httpOptions).subscribe((userData) => {
       res.push(userData["data"]);
     });
-    console.log(res);
     return res;
   }
 }
