@@ -11,7 +11,11 @@ export class SignupComponent implements OnInit {
   us: any;
   usuarios: any;
   pw: any;
+  error: any;
+  errorpw = false;
+  errortipo = false;
   constructor(private uservice: UsersService) {
+    this.error = false;
     this.us = [];
     this.pw = '';
     this.usuarios = {
@@ -21,7 +25,8 @@ export class SignupComponent implements OnInit {
       email: '',
       DateOfBirth: '',
       password: '',
-      cpassword:'',
+      cpassword: '',
+      description: '',
       vendor: null
     };
   }
@@ -41,19 +46,28 @@ export class SignupComponent implements OnInit {
     }
   }
 
-
-
-
-  saveData(form: NgForm): void {
-
-    // falta verificar que si hayan puesto todos los datos
-    console.log(this.usuarios);
-    if(this.usuarios.password === this.usuarios.cpassword){
-      this.uservice.registerUser(this.usuarios);
-    }else{
-      console.log('Las constraseñas no coinciden')
+  verificar(): void {
+    if (this.usuarios.password !== this.usuarios.cpassword) {
+      this.errorpw = true;
+    } else {
+      this.errorpw = false;
     }
-    
   }
 
+  saveData(form: NgForm): void {
+    // falta verificar que si hayan puesto todos los datos
+    console.log(this.usuarios);
+    if (this.usuarios.vendor === null) {
+      this.errortipo = true;
+    } else {
+      this.errortipo = false;
+    }
+    if (form.valid && !this.errortipo && !this.errorpw) {
+      this.uservice.registerUser(this.usuarios);
+    } else {
+      console.log("Form no valido");
+      
+    }
+  }
+  
 }

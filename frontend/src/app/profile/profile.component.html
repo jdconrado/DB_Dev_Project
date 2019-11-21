@@ -2,29 +2,22 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
-<div class="d-flex justify-content-center mt-5">
 
-        <h3> UCommerce, tu comercio ideal</h3>
-    </div>
-<div class="container emp-profile">
+<div class="d-flex justify-content-center mt-5">
+    <h3> UCommerce, tu comercio ideal</h3>
+</div>
+<div class="container emp-profile" *ngFor="let user of usuarios; index as j">
     <form method="post">
-         
         <div class="row">
             <div class="col-md-4 col-sm-12">
-               
-                <div class="profile-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                        alt="" />
-                    <div class="file btn btn-lg btn-primary">
-                        Change Photo
-                        <input type="file" name="file" />
-                    </div>
+                <div *ngIf="this.user.vendor">
+                    <h4>CAROUSEL PRODUCTOS</h4>
                 </div>
             </div>
             <div class="col-md-4 col-sm-12">
                 <div class="profile-head">
                     <h5>
-                        {{usuarios.name}}
+                        {{user.name}} {{user.lastname}}
                     </h5>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -34,9 +27,9 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-4 my-4" data-toggle="modal" data-target="#exampleModal">
-                    <a class="profile-edit-btn">Editar Perfil</a>
-                </div>
+            <div class="col-md-4 my-4" data-toggle="modal" data-target="#exampleModal" *ngIf="this.param===this.id">
+                <a class="profile-edit-btn">Editar Perfil</a>
+            </div>
         </div>
         <div class="row my-1">
             <div class="col-md-4">
@@ -47,16 +40,16 @@
                         <label>Nombre</label>
                     </div>
                     <div class="col-6">
-                        <p>{{usuarios.name}}</p>
+                        <p>{{user.name}} {{user.lastname}}</p>
                     </div>
 
                 </div>
                 <div class="row my-3">
                     <div class="col-6">
-                        <label>Nombre de usuario</label>
+                        <label>Telefono celular</label>
                     </div>
                     <div class="col-6">
-                        <p> {{usuarios.username}}</p>
+                        <p> {{user.phone}}</p>
                     </div>
 
                 </div>
@@ -65,7 +58,15 @@
                         <label>Email</label>
                     </div>
                     <div class="col-6">
-                        <p>{{usuarios.email}}</p>
+                        <p>{{user.email}}</p>
+                    </div>
+                </div>
+                <div class="row my-3" *ngFor="let desc of descripcion; index as j">
+                    <div class="col-6">
+                        <label>Descripción</label>
+                    </div>
+                    <div class="col-6">
+                        <p>{{desc.vendorDetails.description}}</p>
                     </div>
                 </div>
             </div>
@@ -74,8 +75,8 @@
 </div>
 
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div *ngFor="let user of usuarios; index as j" class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -84,38 +85,40 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" *ngFor="let user of usuarios; index as j">
                 <form (ngSubmit)="actualizarDatos()">
-
                     <div class="form-group">
-
                         <label>Nombre
-                            <input [(ngModel)]="usuarios.name" type="text" placeholder="Name" name="name"
+                            <input [(ngModel)]="user.name" type="text" placeholder="Name" name="name"
                                 class="form-control my-2">
                         </label>
                     </div>
-
                     <div class="form-group">
-
-                        <label>Nombre de usuario
-                            <input [(ngModel)]="usuarios.username" type="text" placeholder="Digite su nombre de usuario"
+                            <label>Apellido
+                                <input [(ngModel)]="user.lastname" type="text" placeholder="Name" name="lname"
+                                    class="form-control my-2">
+                            </label>
+                        </div>
+                    <div class="form-group">
+                        <label>Telefono celular
+                            <input [(ngModel)]="user.phone" type="text" placeholder="Digite su telefono celular"
                                 name="username" class="form-control my-2">
                         </label>
-
                     </div>
-
                     <div class="form-group">
-
                         <label>Email
-                            <input [(ngModel)]="usuarios.email" type="email" placeholder="Digite su email" name="email"
+                            <input [(ngModel)]="user.email" type="email" placeholder="Digite su email" name="email"
                                 class="form-control my-2">
                         </label>
-
                     </div>
-
+                    <div class="form-group" *ngFor= "let desc of descripcion; index as iii">
+                            <label>Descripción
+                                <input [(ngModel)]="desc.vendorDetails.description" type="text" placeholder="Digite su Descripción" name="descripcion"
+                                    class="form-control my-2">
+                            </label>
+                        </div>
                     <button class="btn btn-warning mt-3" type="submit">Confirmar cambios</button>
                 </form>
-
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

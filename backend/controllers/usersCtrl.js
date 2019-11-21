@@ -1,16 +1,20 @@
 const usersModel = require('../models/Users');
-const jwt = require('jsonwebtoken');
 let requests = require('request');
 const usersCtrl = {}
 
 usersCtrl.getData= async (req, res) => {
-    let {name,lastname} = await usersModel.findById(req.params.id);
+    let {name,lastname,phone,email,DateOfBirth,ImageID, vendor} = await usersModel.findById(req.params.id);
     if(name){
         res.json({
             "result":"Successful.",
             "data": {
                 name,
-                lastname
+                lastname,
+                phone,
+                email,
+                DateOfBirth,
+                ImageID,
+                vendor
             }
         });
     }else{
@@ -25,35 +29,27 @@ usersCtrl.getData= async (req, res) => {
 
 usersCtrl.insertData = async (req, res)=>{
     try{
-        //console.log(req.body);
-        var {name, lastname, email, password, cpassword, phone, DateOfBirth, ImageID, vendor}=req.body;
-        //console.log(email);
-        phone = "";
+        var {name, lastname, email, description, password, cpassword, phone, DateOfBirth, ImageID, vendor}=req.body;
         DateOfBirth = new Date();
         ImageID = "";
         if(password==cpassword){
             const emU = await usersModel.findOne({email: email});
             if(emU){
                 console.log('Email in use.');
-                //Redirect
                 return res.json({
                     "result":"error.",
                     "error": "Email en uso."
                 });
             }
-            let data = new usersModel({name, lastname, phone, email, DateOfBirth, ImageID, password});
+            let data = new usersModel({name, lastname, phone, email, DateOfBirth, ImageID, password, vendor});
             data.password = await data.encryptPassword(password);
-            //console.log(data);
             await data.save();
-            var js={"userId": data.id};
+            var js={"userId": data.id, "description": description};
             if(vendor == true){
                 requests.post('http://localhost:8080/USERS/VENDORS/create', {json: js});
             }else{
-                //console.log('Datos guardados.');
                 requests.post('http://localhost:8080/USERS/CLIENTS/create', {json: js});
             }
-            //var token = data.generateJwt();
-            //console.log(token);
             res.json({
                 "result":"Successful.",
             }); 
@@ -68,6 +64,33 @@ usersCtrl.insertData = async (req, res)=>{
         });
     }
 };
+
+usersCtrl.modify=async(req, res)=>{
+    var {userId, name, lastname, email, phone, DateOfBirth, ImageID} = req.body;
+    let data = await usersModel.findById(userId);
+    await data.updateOne(
+        {name: name},
+        {strict: false});
+    await data.updateOne(
+        {lastname: lastname},
+        {strict: false});    
+    await data.updateOne(
+        {email: email},
+        {strict: false});
+    await data.updateOne(
+        {phone: phone},
+        {strict: false});
+    await data.updateOne(
+        {DateOfBirth: DateOfBirth},
+        {strict: false});
+    await data.updateOne(
+        {ImageId: ImageID},
+        {strict: false});
+    await data.save();
+    res.json({
+        "result":"Successful."
+    });
+}
 
 usersCtrl.login = async(req, res)=>{
    console.log(req.body);
@@ -98,47 +121,5 @@ usersCtrl.login = async(req, res)=>{
     }); 
    }
 };
-
-usersCtrl.tokenCheck = function (req, res){
-    if(!req.payload._id){
-        res.sendStatus(403);
-    }else{
-        usersModel.findById(req.payload._id).exec(function(err,user){
-            res.status(200).json(user);
-        });
-    };
-};
-
-usersCtrl.authT = function (req, res, next){
-    const bearerHeader = req.headers['Authorization'];
-    if(typeof bearerHeader !== 'undefined'){
-        const bearer = bearerHeader.split(' ');
-        const bearerToken = bearer[1];
-        req.token=bearerToken;
-        next();
-    }else{
-        res.sendStatus(403);
-    }
-};
-
-usersCtrl.tokenC = function (req, res){
-    jwt.verify(req.token, 'DevProj',(err, authdata)=>{
-        if(err){
-            res.sendStatus(403);
-        }else{
-            res.json({
-                message: 'good',
-                authdata
-            });
-        }
-    })
-};
-
-//UnComment when services are up.
-//usersCtrl.authT = jwt({
-  //      secret: 'DevProj',
-  //      userProperty: 'payload'
-  //    });
-
 
 module.exports = usersCtrl;

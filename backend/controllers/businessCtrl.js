@@ -10,25 +10,20 @@ businessCtrl.create = async(req, res) => {
     });
 };
 
-businessCtrl.getData = async (req, res)=>{
-    let data = await bsnModel.findById(req.params.id);
+businessCtrl.fetchAll = async (req, res) =>{
+    let data = await bsnModel.find();
     res.json({
         "result":"Successful.",
         data
     });
 };
 
-businessCtrl.bought = async(req,res)=>{
-    let cc = await bsnModel.findById(req.params.id);
-    let p = await bsnModel.find({_id: req.params.id, OrdersCount: {$exists: true}});
-    if(p.length==0) {
-      await cc.updateOne({OrdersCount:1}, {strict:false});
-      await cc.save();
-    }else{
-      await cc.updateOne({$inc: {'OrdersCount': 1}},{strict:false});
-      await cc.save();
-    }
-    res.json(cc);
+businessCtrl.getData = async (req, res)=>{
+    let data = await bsnModel.findById(req.params.id);
+    res.json({
+        "result":"Successful.",
+        data
+    });
 };
 
 businessCtrl.getRated = async(req, res)=>{

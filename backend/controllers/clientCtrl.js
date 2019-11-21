@@ -19,6 +19,14 @@ clientCtrl.getData = async(req, res)=>{
       });
 };
 
+clientCtrl.giveId = async (req, res)=>{
+  let data = await cltModel.find({userId:req.params.id});
+  res.json({
+      "result":"Successful.",
+      "id":data._id
+  });
+}
+
 clientCtrl.bought = async(req,res)=>{
       let cc = await cltModel.findById(req.params.id);
       let p = await cltModel.find({_id: req.params.id, OrdersCount: {$exists: true}});

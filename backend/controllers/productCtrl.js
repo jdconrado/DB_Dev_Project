@@ -10,12 +10,33 @@ productCtrl.create = async(req, res) => {
     });
 };
 
+productCtrl.getProAll = async(req, res)=>{
+    let data = await prdtModel.find({SalesPersonId: req.body.SalesPersonId});
+    res.json({
+        data
+    });
+}
+
 productCtrl.modify = async (req, res) =>{
-    await prdtModel.updateOne(
-        {_id: req.params.id},
-        {$set: req.body},
+    let data = await prdtModel.findById(req.params.id);
+    let {name, price, available, imageId} = req.body;
+    await data.updateOne(
+        {name: name},
         {strict:false}
     );
+    await data.updateOne(
+        {price: price},
+        {strict:false}
+    );
+    await data.updateOne(
+        {available: available},
+        {strict:false}
+    );
+    await data.updateOne(
+        {imageId: imageId},
+        {strict:false}
+    );
+    await data.save();
     res.json({
         "result":"Successful."
     });

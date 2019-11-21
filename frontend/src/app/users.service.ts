@@ -8,20 +8,19 @@ import { AuthenticationService } from './authentication.service';
   providedIn: 'root'
 })
 export class UsersService {
-  
+  error: any;
   private BaseURL = 'http://localhost:8080';
 
   private httpOptions = {
-    headers : new HttpHeaders({
-    'Content-Type': 'application/json'
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
     }),
   };
 
-  constructor(private http: HttpClient, private router: Router, private auth :  AuthenticationService) {}
-  
-  public getUsers() {
-    return this.http.get(`${this.BaseURL}/USERS/register`);
+  constructor(private http: HttpClient, private router: Router, private auth: AuthenticationService) {
+    this.error = false;
   }
+
 
   public registerUser(user: any) {
 
@@ -29,26 +28,29 @@ export class UsersService {
     this.http.post(`${this.BaseURL}/USERS/register`, user, this.httpOptions).subscribe(
       (data) => {
         console.log(data);
-        if( (data["result"] as string).includes("Successful")){
+        if ((data["result"] as string).includes("Successful")) {
           this.router.navigate(['/login']);
-        }else{
+        } else {
           // Mostrar alerta de error
         }
       }
     );
- 
   }
 
-  public login(user: any){
-    this.http.post(`${this.BaseURL}/USERS/login`, user, this.httpOptions).subscribe( (data) =>{
+  public login(user: any) {
+    this.http.post(`${this.BaseURL}/USERS/login`, user, this.httpOptions).subscribe((data) => {
       console.log(data);
-      if( (data["result"] as string).includes("Successful")){
+      if ((data["result"] as string).includes("Successful")) {
         this.auth.saveToken(data['token']);
         this.router.navigate(['/home']);
-      }else{
+        this.error = false;
+      } else {
         console.log('Hubo un error mano');
+        this.error = true;
         // Mostrar alerta de error de login no correcto
       }
+      this.auth.sw = this.auth.isTokenValid();
+      console.log(this.auth.sw);
     });
   }
 
@@ -68,21 +70,54 @@ export class UsersService {
       'Something bad happened; please try again later.');
   }
 
-  public getAllVendors() : any {
+  public getAllVendors(): any {
     let res = [];
-    this.http.get(`${this.BaseURL}/USERS/VENDORS/fetch` ,this.httpOptions).subscribe( (data) =>{
+    this.http.get(`${this.BaseURL}/USERS/VENDORS/fetch`, this.httpOptions).subscribe((data) => {
       data["data"].forEach(vendor => {
-        this.http.get(`${this.BaseURL}/USERS/info/${vendor["userId"]}` ,this.httpOptions).subscribe( (userData) =>{
+        this.http.get(`${this.BaseURL}/USERS/info/${vendor["userId"]}`, this.httpOptions).subscribe((userData) => {
           res.push({
-            name : userData["data"]["name"],
-            lastName : userData["data"]["lastname"],
-            vendorDetails : vendor
+            name: userData["data"]["name"],
+            lastName: userData["data"]["lastname"],
+            vendorDetails: vendor
           });
         });
       });
-      
     });
     return res;
   }
-  
+
+  public getVendors(id: any): any {
+    let res = [];
+    this.http.get(`${this.BaseURL}/USERS/VENDORS/fetch`, this.httpOptions).subscribe((data) => {
+      data["data"].forEach(vendor => {
+        if (vendor["userId"] === id) {
+          this.http.get(`${this.BaseURL}/USERS/info/${id}`, this.httpOptions).subscribe((userData) => {
+            res.push({
+              name: userData["data"]["name"],
+              lastName: userData["data"]["lastname"],
+              vendorDetails: vendor
+            });
+          });
+        }
+      });
+    });
+    return res;
+  }
+
+  public getVendorId(id: any): any {
+    let res = [];
+    this.http.get(`${this.BaseURL}/USERS/vendors/giveid/${id}`, this.httpOptions).subscribe((userData) => {
+      res.push(userData["data"]);
+    });
+    console.log(res);
+    return res;
+  }
+
+  public getUser(id: any): any {
+    let res = [];
+    this.http.get(`${this.BaseURL}/USERS/info/${id}`, this.httpOptions).subscribe((userData) => {
+      res.push(userData["data"]);
+    });
+    return res;
+  }
 }

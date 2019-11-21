@@ -12,49 +12,96 @@
             <h5 class="card-title text-center">Registrate</h5>
             <form class="form-signin" #f="ngForm" (ngSubmit)="saveData(f)">
               <div class="form-label-group">
-                <input [(ngModel)]="usuarios.name" name="name" type="text" id="inputName" class="form-control" placeholder="Nombre" required autofocus>
+                <input [(ngModel)]="usuarios.name" name="name" type="text" #name="ngModel" class="form-control"
+                  placeholder="Nombre" required autofocus>
                 <label for="inputName">Nombre</label>
               </div>
-              <div class="form-label-group">.
-                <input [(ngModel)]="usuarios.lastname" name="lastname" type="text" id="inputLName" class="form-control" placeholder="Apellido" required autofocus>
+              <div class="alert alert-danger" role="alert" *ngIf="name.touched && !name.valid">
+                <div>
+                  El nombre es requerido
+                </div>
+              </div>
+              <div class="form-label-group">
+                <input [(ngModel)]="usuarios.lastname" name="lastname" type="text" #lastname="ngModel"
+                  class="form-control" placeholder="Apellido" required autofocus>
                 <label for="inputLName">Apellido</label>
               </div>
+              <div class="alert alert-danger" role="alert" *ngIf="lastname.touched && !lastname.valid">
+                <div>
+                  El apellido es requerido
+                </div>
+              </div>
               <div class="form-label-group">
-                <input [(ngModel)]="usuarios.phone" name="phone" type="text" id="Phone" class="form-control" placeholder="Telefono" required autofocus>
+                <input [(ngModel)]="usuarios.phone" name="phone" type="text" #phone="ngModel" class="form-control"
+                  placeholder="Telefono" required autofocus>
                 <label for="Phone">Telefono Celular</label>
               </div>
+              <div class="alert alert-danger" role="alert" *ngIf="phone.touched && !phone.valid">
+                <div>
+                  El telefono celular es requerido
+                </div>
+              </div>
               <div class="form-label-group">
-                <input [(ngModel)]="usuarios.email" name="email" type="email" id="inputEmail" class="form-control" placeholder="Dirección de correo electrónico"
-                  required>
+                <input [(ngModel)]="usuarios.email" name="email" type="email" #email="ngModel" class="form-control"
+                  placeholder="Dirección de correo electrónico" required>
                 <label for="inputEmail">Correo</label>
               </div>
-              <div class="form-label-group">
-                  <input [(ngModel)]="usuarios.DateOfBirth" name="birth" type="date" id="birth" class="form-control" placeholder="Fecha de cumpleaños"
-                    required>
-                  <label for="birth">Fecha de cumpleaños</label>
+              <div class="alert alert-danger" role="alert" *ngIf="email.touched && !email.valid">
+                <div>
+                  El correo electronico es requerido
                 </div>
-              <hr>
-
+              </div>
               <div class="form-label-group">
-                <input [(ngModel)]="usuarios.password" name="pw" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <input [(ngModel)]="usuarios.DateOfBirth" name="birth" type="date" #birth="ngModel" class="form-control"
+                  placeholder="Fecha de cumpleaños" required>
+                <label for="birth">Fecha de cumpleaños</label>
+              </div>
+              <div class="alert alert-danger" role="alert" *ngIf="birth.touched && !birth.valid">
+                <div>
+                  La fecha de su cumpleaños es requerida
+                </div>
+             </div>
+              <div class="form-label-group">
+                <input [(ngModel)]="usuarios.password" name="pw" type="password" #pw="ngModel" class="form-control"  (ngModelChange)="verificar()"
+                  placeholder="Password" required>
                 <label for="inputPassword">Contraseña</label>
               </div>
-
+              <div class="alert alert-danger" role="alert" *ngIf="pw.touched && !pw.valid">
+                <div>
+                  La contraseña es requerida
+                </div>
+             </div>
               <div class="form-label-group">
-                <input  [(ngModel)]="usuarios.cpassword" name="pw" type="password" id="inputPassword" class="form-control" placeholder="cPassword" required>
+                <input [(ngModel)]="usuarios.cpassword" name="pw2" type="password" #pw2="ngModel" (ngModelChange)="verificar()"
+                  class="form-control" placeholder="cPassword" required>
                 <label for="inputConfirmPassword">Repite la contraseña</label>
               </div>
+              <div class="alert alert-danger" role="alert" *ngIf="pw2.touched && !pw2.valid">
+                <div>
+                  La confirmación de su contraseña es requerida
+                </div>
+             </div>
+             <div class="alert alert-danger" role="alert" *ngIf="errorpw && pw2.valid">
+              <div>
+                Las contraseñas no coinciden
+              </div>
+           </div>
               <div class="form-group">
-
-                <select class="form-control" name="hola" id="exampleFormControlSelect" (click)="myFunction($event)">
+                <select class="form-control" name="hola" id="tipo" (click)="myFunction($event)">
                   <option value="" disabled selected>Seleccione el tipo de usuario</option>
                   <option value="cliente">Cliente</option>
                   <option value="vendedor">Vendedor</option>
                 </select>
               </div>
+              <div class="alert alert-danger" role="alert" *ngIf="errortipo">
+                <div>
+                  El tipo de usuario es requerido
+                </div>
+             </div>
               <div class="form-group" *ngIf="show">
                 <label for="inputDesc">Escriba aqui una descripción general de lo que vende</label>
-                <textarea class="form-control" id="InputDesc" rows="3" required></textarea>
+                <textarea [(ngModel)]="usuarios.description" name="desc" class="form-control" id="InputDesc" rows="3"
+                  required></textarea>
               </div>
               <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Registrar</button>
               <a class="d-block text-center mt-2 small" routerLinkActive="active-link" [routerLink]="['/login']">Inicia
