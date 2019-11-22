@@ -19,6 +19,7 @@ import { AuthenticationService } from './authentication.service'
 import { HttpClientModule } from '@angular/common/http';
 import { OrderComponent } from './order/order.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { PedidosCComponent } from './pedidos-c/pedidos-c.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'order', component: OrderComponent },
   { path: 'pedidos', component: PedidosComponent },
+  { path: 'pedidosc', component: PedidosCComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -45,7 +47,8 @@ const routes: Routes = [
     ProfileComponent,
     CatalogComponent,
     OrderComponent,
-    PedidosComponent
+    PedidosComponent,
+    PedidosCComponent
   ],
   imports: [
     FormsModule,

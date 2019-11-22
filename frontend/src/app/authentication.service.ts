@@ -8,9 +8,12 @@ import { Router } from '@angular/router';
 export class AuthenticationService {
 
   private token: string;
-  sw: boolean;
+  sw: any;
   constructor(private http: HttpClient, private router: Router) {
     this.token = '';
+    if (this.sw) {
+      console.log(this.isTokenValid());
+    }
   }
 
   public saveToken(token: string): void {

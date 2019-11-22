@@ -50,7 +50,6 @@ export class UsersService {
         // Mostrar alerta de error de login no correcto
       }
       this.auth.sw = this.auth.isTokenValid();
-      console.log(this.auth.sw);
     });
   }
 

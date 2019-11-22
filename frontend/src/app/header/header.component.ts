@@ -7,10 +7,17 @@ import { AuthenticationService } from '../authentication.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  sw: any;
   constructor(private head: AuthenticationService) {
+
+
   }
 
   ngOnInit() {
+   
+    this.sw = this.head.isTokenValid();
+ 
+
   }
 
 }
