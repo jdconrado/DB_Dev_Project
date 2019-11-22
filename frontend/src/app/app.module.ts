@@ -24,6 +24,7 @@ import { OrderComponent } from './order/order.component';
 import { ShoppingcartComponent, comfirmQuantity, shopElement} from './shoppingcart/shoppingcart.component';
 import { ToastrModule  } from 'ngx-toastr';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'vendor', component: VendorComponent },
   { path: 'profile/:id', component: ProfileComponent },
   { path: 'order', component: OrderComponent },
+  { path: 'pedidos', component: PedidosComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -51,7 +53,8 @@ const routes: Routes = [
     OrderComponent,
     ShoppingcartComponent,
     comfirmQuantity,
-    shopElement
+    shopElement,
+    PedidosComponent
   ],
   imports: [
     FormsModule,
