@@ -1,5 +1,4 @@
 const imgModel = require('../models/Images');
-const fs = require('fs');
 const imagesCtrl = {};
 
 imagesCtrl.upload = async (req, res) => {
@@ -10,13 +9,11 @@ imagesCtrl.upload = async (req, res) => {
     }else{
          let data = new imgModel({
             dateUploaded : new Date(),
-            imgData: fs.readFileSync(req.file.path),
-            imgType: req.file.mimetype,
+            imgUrl: req.file.path,
             entityType: req.body.entityType,
             entityId: req.body.entityId
         });
         await data.save();
-        fs.unlinkSync(req.file.path);
         res.json({
             "id": data._id,
             "result":"Successful."

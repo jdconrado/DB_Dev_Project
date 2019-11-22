@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,9 +16,14 @@ import { ProfileComponent } from './profile/profile.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CatalogService } from './catalog/catalog.service';
 import { UsersService } from './users.service';
+import { ImagesService} from './images.service';
+import { ShoppingService} from './shopping.service';
 import { AuthenticationService } from './authentication.service'
 import { HttpClientModule } from '@angular/common/http';
 import { OrderComponent } from './order/order.component';
+import { ShoppingcartComponent, comfirmQuantity, shopElement} from './shoppingcart/shoppingcart.component';
+import { ToastrModule  } from 'ngx-toastr';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -42,20 +48,33 @@ const routes: Routes = [
     VendorComponent,
     ProfileComponent,
     CatalogComponent,
-    OrderComponent
+    OrderComponent,
+    ShoppingcartComponent,
+    comfirmQuantity,
+    shopElement
   ],
   imports: [
     FormsModule,
     BrowserModule,
     AppRoutingModule,
+    NgbModule,
     RouterModule.forRoot(routes),
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-bottom-right',
+    })
   ],
   providers: [
     CatalogService,
     UsersService,
-    AuthenticationService
+    AuthenticationService,
+    ImagesService,
+    ShoppingService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[
+    comfirmQuantity
+  ],
 })
 export class AppModule { }

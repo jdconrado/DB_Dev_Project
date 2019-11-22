@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h4 class="modal-title">Hi there!</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <h4>Está comprando: {{product.name}}</h4>
+    <h6>Precio: {{product.price}}</h6>
+    <label for="quantity">Seleccione cantidad:</label>
+    <input [(ngModel)]="quantity" name="quantity" type="number"  id="quantity" class="form-control" required>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">Cancelar</button>
+    <button type="button" class="btn btn-success" (click)="addToCart()">Añadir al carro</button>
+</div>
