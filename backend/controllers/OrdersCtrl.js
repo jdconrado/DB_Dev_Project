@@ -4,16 +4,20 @@ const orderCtrl = {};
 let requests = require('request');
 
 orderCtrl.create = async (req, res) =>{
+    console.log(req.body);
     let order = new orderModel({
         dateTime:new Date(),
         status:"PENDIENTE",
         lineTotal:0,
         clientId:req.body.clientId,
         businessId: req.body.businessId,
-        vendorId: req.body.vendorId // 68468sdfsdf 8524685sdfsdf
+        vendorId: req.body.SalesPersonId // 68468sdfsdf 8524685sdfsdf
     });
-
-    await requests.post("http://localhost:8080/ORDERS/DETAILS/create/", {json: {orderId: order._id , details : req.body.products}} );
+    order.save();
+    req.body.products.forEach(async el => {
+        await requests.post("http://localhost:8080/ORDERS/DETAILS/create/", {json: {orderId: order._id , details : el}} );
+    });
+    
     res.json({
         "result":"Successful"
     })
@@ -38,7 +42,7 @@ orderCtrl.fetchS = async (req, res) =>{
 }
 
 orderCtrl.fetchC = async (req, res) =>{
-    console.log( req.params.id);
+    console.log(req.params.id);
     let data = await orderModel.find({clientId: req.params.id});
     let det = [];
     data.forEach(async Element =>{

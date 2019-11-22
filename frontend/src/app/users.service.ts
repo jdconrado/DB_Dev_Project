@@ -104,6 +104,20 @@ export class UsersService {
     return res;
   }
 
+
+  public getClient(id: any): any {
+    let res = [];
+      this.http.get(`${this.BaseURL}/USERS/CLIENTS/giveid/${id}`, this.httpOptions).subscribe((userData) => {
+        res.push({
+          id: userData["id"]
+        });
+      });
+    
+      console.log(res);
+    return res;
+  }
+
+
   public getVendorId(id: any): any {
     let res = [];
     this.http.get(`${this.BaseURL}/USERS/vendors/giveid/${id}`, this.httpOptions).subscribe((userData) => {
@@ -113,15 +127,15 @@ export class UsersService {
     return res;
   }
 
-  public createProdct(prdct: any){
-    this.http.post(`${this.BaseURL}/PRODUCTS/create`,prdct, this.httpOptions).subscribe((data)=>{
-      if((data["result"] as String).includes("Successful")){
+  public createProdct(prdct: any) {
+    this.http.post(`${this.BaseURL}/PRODUCTS/create`, prdct, this.httpOptions).subscribe((data) => {
+      if ((data["result"] as String).includes("Successful")) {
         this.toastr.success("Producto creado de manera exitosa");
       }
     });
   }
 
-  public getProductsForVendor(id:String): Observable<any> {
+  public getProductsForVendor(id: String): Observable<any> {
     return this.http.get(`${this.BaseURL}/PRODUCTS/getprodcts/${id}`, this.httpOptions);
   }
 
@@ -133,10 +147,10 @@ export class UsersService {
     return res;
   }
 
-  public updateUser(user: any, id: String){
+  public updateUser(user: any, id: String) {
     console.log(user);
-    this.http.put(`${this.BaseURL}/USERS/modify/${id}`, user, this.httpOptions).subscribe((data)=>{
-      if((data["result"]as String).includes("Successful")){
+    this.http.put(`${this.BaseURL}/USERS/modify/${id}`, user, this.httpOptions).subscribe((data) => {
+      if ((data["result"] as String).includes("Successful")) {
         this.toastr.success("Actualizado de manera exitosas.");
       }
     });

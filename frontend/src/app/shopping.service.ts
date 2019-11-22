@@ -27,6 +27,7 @@ export class ShoppingService {
         this.cart = [];
         let venta = {
           SalesPersonId: spId,
+          clientId: this.auth.getUserID(),
           products: [{
             productId: pId,
             productImg: img,
@@ -46,10 +47,12 @@ export class ShoppingService {
             break;
           }
         }
-
+      
+      
         if (index == -1) {
           let venta = {
             SalesPersonId: spId,
+            clientId: this.auth.getUserID(),
             products: [{
               productId: pId,
               productName: pName,

@@ -4,12 +4,15 @@ const orderDetCtrl = {};
 orderDetCtrl.create = async (req, res) =>{
     let orderId = req.body.orderId;
     let {productId, price, quantity}=req.body.details;
+    console.log(req.body);
+    var total=parseInt(quantity)*parseInt(price);
+    console.log(quantity);
     let data = new orderDetModel({
         orderId:orderId,
         productId:productId,
         price:price,
         quantity:quantity,
-        total:quantity*price
+        total:total
     });
     await data.save(); 
 
