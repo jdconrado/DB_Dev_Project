@@ -36,9 +36,9 @@ app.use('/COMMENTS/', require('./routes/commentRoute'));
 app.use('/uploads', express.static('uploads'));
 
 //Comentado para probar
-//app.all('/*',express.static(path.join(__dirname, '../frontend/dist/frontend')), (req, res, next) => {
-  //  res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'))
-//});
+app.all('/*',express.static(path.join(__dirname, '../frontend/dist/frontend')), (req, res, next) => {
+    res.sendFile(path.join(__dirname, '../frontend/dist/frontend/index.html'))
+});
 
 //Starting the server
 
