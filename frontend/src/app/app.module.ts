@@ -54,7 +54,7 @@ const routes: Routes = [
     CatalogComponent,
     OrderComponent,
     PedidosComponent,
-    PedidosCComponent
+    PedidosCComponent,
     ShoppingcartComponent,
     comfirmQuantity,
     shopElement,

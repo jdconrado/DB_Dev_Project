@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Productos } from '../ProductosPruebaOrder';
+import { ShoppingService } from '../shopping.service';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-order',
@@ -7,15 +9,18 @@ import { Productos } from '../ProductosPruebaOrder';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
-  productos = Productos;
+  productos: any;
   suma = 0;
-  constructor() {
-    for (let index = 0; index < this.productos.length; index++) {
-      this.productos[index].precioTotal = this.productos[index].precio * this.productos[index].cantidad;
-      this.suma = this.productos[index].precioTotal + this.suma;
-    }
+  fila: any;
+  info: any;
+  constructor(private cart: ShoppingService, private user: UsersService) {
+
   }
   ngOnInit() {
   }
-
+  public makeorder() {
+    this.cart.getCart().forEach(element => {
+      this.cart.makeOrder(element);
+    });
+  }
 }
