@@ -1,0 +1,19 @@
+
+<div class="container-fluid bg-white rounded border border-success" style="padding: 10%;">
+
+    <button type="button" class="btn btn-block btn-sm btn-secondary" (click)="updateCart()">Refrescar Carro</button>
+    <button type="button" class="btn btn-block btn-sm btn-secondary" (click)="terminarCompra()">Terminar Compra</button>
+    <div class="contaier" style="text-align:center;">
+        <h1> {{cartelements.length}}</h1>
+        <p>Elementos en el carro</p>
+    </div>
+    <span class="border-bottom"></span>
+    <div>
+        <app-shopelement 
+        *ngFor="let ele of cartelements"
+        [element] = "ele">
+        </app-shopelement>
+    </div>
+    <button type="button" class="btn btn-block btn-sm btn-danger" (click)="limpiar()">Limpiar Carro</button>
+
+</div>

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ShoppingService } from './shopping.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,8 @@ export class AuthenticationService {
     this.token = token;
   }
 
-  private getToken(): string {
-    if (!this.token) {
-      this.token = localStorage.getItem('UComm-token');
-    }
+  private getToken(): String {
+    this.token = localStorage.getItem('UComm-token');
     return this.token;
   }
 
@@ -37,7 +36,7 @@ export class AuthenticationService {
 
   public isTokenValid(): boolean { // Checa si el token aún no expira
     let payload;
-    if (this.getToken) {
+    if (this.getToken()) {
       payload = this.token.split('.')[1];
       payload = window.atob(payload);
       payload = JSON.parse(payload);
