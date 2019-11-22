@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
     // return this.Usuarios[i];
   }
   actualizarDatos() {
+    this.users.updateUser(this.usuarios);
     // this.ii = Math.trunc(this.ii);
     // USUARIOS[this.ii] = this.usuarios; // Toca implementar servicios con la base de datos para actualizar los datos directamente
   }

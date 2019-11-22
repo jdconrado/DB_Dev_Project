@@ -10,6 +10,6 @@ router.get('/fetch/:id/price', prdtCtrl.fetchPrice);
 router.put('/update/:id', prdtCtrl.modify);
 router.delete('/delete/', prdtCtrl.deleteByCond);
 router.delete('/delete/:id', prdtCtrl.delete);
-router.get('/getprodcts/', prdtCtrl.getProAll);
+router.get('/getprodcts/:sId', prdtCtrl.getProAll);
 
 module.exports = router;

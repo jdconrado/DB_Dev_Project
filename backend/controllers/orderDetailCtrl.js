@@ -16,7 +16,7 @@ orderDetCtrl.create = async (req, res) =>{
 }
 
 orderDetCtrl.fetch = async (req, res) =>{
-    let data = await orderDetModel.find({orderId: req.body.orderId});
+    let data = await orderDetModel.find({orderId: req.params.id});
     res.json({
         "ordersDet":data
     });
