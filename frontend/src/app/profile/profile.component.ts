@@ -48,7 +48,7 @@ export class ProfileComponent implements OnInit {
     // return this.Usuarios[i];
   }
   actualizarDatos() {
-    this.users.updateUser(this.usuarios);
+    this.users.updateUser(this.usuarios, this.param);
     // this.ii = Math.trunc(this.ii);
     // USUARIOS[this.ii] = this.usuarios; // Toca implementar servicios con la base de datos para actualizar los datos directamente
   }
@@ -56,5 +56,12 @@ export class ProfileComponent implements OnInit {
   anadirProducto() {
     console.log(this.descripcion["0"].vendorDetails._id);
     console.log(this.producto["0"]);
+    let pro = {
+      name:this.producto["0"].name,
+      price: this.producto["0"].price,
+      available: this.producto["0"].quantity,
+      SalesPersonId: this.descripcion["0"].vendorDetails._id
+    }
+    this.users.createProdct(pro);
   }
 }

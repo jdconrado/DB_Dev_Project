@@ -3,7 +3,7 @@
 # compiled output
 
 # IMPORTANT ::::::::::   WHEN NO READY FOR PRODUCTION UNCOMMENT /dist
-/dist
+#/dist
 /tmp
 /out-tsc
 # Only exists if Bazel was run

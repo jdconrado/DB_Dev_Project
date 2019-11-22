@@ -115,7 +115,7 @@ export class UsersService {
 
   public createProdct(prdct: any){
     this.http.post(`${this.BaseURL}/PRODUCTS/create`,prdct, this.httpOptions).subscribe((data)=>{
-      if((data['results']as String).includes("Successful")){
+      if((data["result"] as String).includes("Successful")){
         this.toastr.success("Producto creado de manera exitosa");
       }
     });
@@ -133,9 +133,10 @@ export class UsersService {
     return res;
   }
 
-  public updateUser(user: any){
-    this.http.put(`${this.BaseURL}/USERS/info/${user.userId}`, user, this.httpOptions).subscribe((data)=>{
-      if((data['results']as String).includes("Successful")){
+  public updateUser(user: any, id: String){
+    console.log(user);
+    this.http.put(`${this.BaseURL}/USERS/modify/${id}`, user, this.httpOptions).subscribe((data)=>{
+      if((data["result"]as String).includes("Successful")){
         this.toastr.success("Actualizado de manera exitosas.");
       }
     });

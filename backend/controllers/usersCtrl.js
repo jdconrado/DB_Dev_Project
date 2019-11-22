@@ -66,8 +66,8 @@ usersCtrl.insertData = async (req, res)=>{
 };
 
 usersCtrl.modify=async(req, res)=>{
-    var {userId, name, lastname, email, phone, DateOfBirth, ImageID} = req.body;
-    let data = await usersModel.findById(userId);
+    var {name, lastname, email, phone, DateOfBirth, ImageID} = req.body;
+    let data = await usersModel.findById(req.params.id);
     await data.updateOne(
         {name: name},
         {strict: false});

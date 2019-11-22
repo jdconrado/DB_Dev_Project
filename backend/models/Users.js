@@ -7,7 +7,7 @@ const usersModel = new Schema({
     name: {type: String, required: true},
     lastname:{type: String, required: true},
     phone: {type: String, required: false},
-    email: {type: String, required: true, unique: true},
+    email: {type: String, required: true},
     DateOfBirth: {type: Date, required: false},
     ImageID: {type: String, required: false},
     password: {type: String, required: true},

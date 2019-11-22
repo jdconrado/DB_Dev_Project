@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="col-md-4 my-4" data-toggle="modal" data-target="#exampleModal" *ngIf="this.param===this.id">
-                <a class="profile-edit-btn">Editar Perfil</a>
+            
                 <a class="profile-edi-btn" [routerLink]="['/pedidos']" *ngIf="this.user.vendor">Ver Pedidos</a>
                 <a class="profile-edi-btn" [routerLink]="['/pedidosc']" *ngIf="!this.user.vendor">Ver Pedidos</a>
             </div>
@@ -93,7 +93,7 @@
                 </button>
             </div>
             <div class="modal-body" *ngFor="let user of usuarios; index as j">
-                <form (ngSubmit)="actualizarDatos()">
+                <form >
                     <div class="form-group">
                         <label>Nombre
                             <input [(ngModel)]="user.name" type="text" placeholder="Name" name="name"
@@ -148,19 +148,19 @@
                 <form (ngSubmit)="anadirProducto()">
                     <div class="form-group">
                         <label>Nombre
-                            <input [(ngModel)]="p.name" type="text" placeholder="Name" name="name"
+                            <input [(ngModel)]="p.name" type="text" placeholder="Nombre" name="name"
                                 class="form-control my-2">
                         </label>
                     </div>
                     <div class="form-group">
                             <label>Precio
-                                <input [(ngModel)]="p.price" type="text" placeholder="Name" name="lname"
+                                <input [(ngModel)]="p.price" type="text" placeholder="Precio" name="lname"
                                     class="form-control my-2">
                             </label>
                         </div>
                     <div class="form-group">
                         <label>Cantidad:
-                            <input [(ngModel)]="p.available" type="text" placeholder="Digite su telefono celular"
+                            <input [(ngModel)]="p.available" type="text" placeholder="Cantidad disponible"
                                 name="username" class="form-control my-2">
                         </label>
                     </div>
