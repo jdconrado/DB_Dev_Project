@@ -11,7 +11,7 @@ productCtrl.create = async(req, res) => {
 };
 
 productCtrl.getProAll = async(req, res)=>{
-    let data = await prdtModel.find({SalesPersonId: req.body.SalesPersonId});
+    let data = await prdtModel.find({SalesPersonId: req.params.sId});
     res.json({
         "result":"Successful.",
         data

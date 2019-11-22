@@ -94,6 +94,14 @@ export class ShoppingService {
   }
 
   public makeOrder(order: any) {
+    this.http.post(`${this.BaseURL}/ORDERS/create`, order, this.httpOptions).subscribe(
+      (data)=>{
+        if((data['Results'] as String).includes("Successful")){
+          this.clearCart();
+          this.toastr.success("Compra realizada.");
+        }
+      }
+    );
     console.log("X");
     console.log(order);
     //this.http.post(`${this.BaseURL}`, order, this.httpOptions);

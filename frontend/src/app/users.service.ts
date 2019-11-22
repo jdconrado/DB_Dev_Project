@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { User } from './user';
 import { throwError, Observable } from 'rxjs';
 import { AuthenticationService } from './authentication.service';
+import { ToastrService } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,7 +18,7 @@ export class UsersService {
     }),
   };
 
-  constructor(private http: HttpClient, private router: Router, private auth: AuthenticationService) {
+  constructor(private http: HttpClient, private router: Router, private auth: AuthenticationService, private toastr: ToastrService) {
     this.error = false;
   }
 
@@ -112,6 +113,18 @@ export class UsersService {
     return res;
   }
 
+  public createProdct(prdct: any){
+    this.http.post(`${this.BaseURL}/PRODUCTS/create`,prdct, this.httpOptions).subscribe((data)=>{
+      if((data['results']as String).includes("Successful")){
+        this.toastr.success("Producto creado de manera exitosa");
+      }
+    });
+  }
+
+  public getProductsForVendor(id:String): Observable<any> {
+    return this.http.get(`${this.BaseURL}/PRODUCTS/getprodcts/${id}`, this.httpOptions);
+  }
+
   public getUser(id: any): any {
     let res = [];
     this.http.get(`${this.BaseURL}/USERS/info/${id}`, this.httpOptions).subscribe((userData) => {
@@ -119,4 +132,13 @@ export class UsersService {
     });
     return res;
   }
+
+  public updateUser(user: any){
+    this.http.put(`${this.BaseURL}/USERS/info/${user.userId}`, user, this.httpOptions).subscribe((data)=>{
+      if((data['results']as String).includes("Successful")){
+        this.toastr.success("Actualizado de manera exitosas.");
+      }
+    });
+  }
+
 }
