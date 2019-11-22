@@ -5,6 +5,7 @@ import { User } from '../user';
 import { UsersService } from '../users.service';
 import { AuthenticationService } from '../authentication.service';
 import { FOTOS } from '../vendor/fotos';
+import { Prod } from '../prod';
 
 @Component({
   selector: 'app-profile',
@@ -17,18 +18,23 @@ export class ProfileComponent implements OnInit {
   descripcion: any;
   id: any;
   param: any;
+  producto: any;
   constructor(
     private ruta: ActivatedRoute, private users: UsersService, private auth: AuthenticationService
   ) {
-    this.fotos =
-      this.id = '';
+
+    this.producto = [{ name: '', precio: 0, quantity: 0 }];
+
+    this.id = '';
     if (this.auth.isTokenValid) {
       this.id = this.auth.getUserID();
     }
     this.ruta.params.subscribe(params => {
-      this.param = params.id;
-      this.usuarios = this.users.getUser(params.id);
-      this.descripcion = this.users.getVendors(this.param);
+      
+        this.param = params.id;
+        this.usuarios = this.users.getUser(params.id);
+        this.descripcion = this.users.getVendors(this.param);
+    
     });
 
 
@@ -44,5 +50,10 @@ export class ProfileComponent implements OnInit {
   actualizarDatos() {
     // this.ii = Math.trunc(this.ii);
     // USUARIOS[this.ii] = this.usuarios; // Toca implementar servicios con la base de datos para actualizar los datos directamente
+  }
+
+  anadirProducto() {
+    console.log(this.descripcion["0"].vendorDetails._id);
+    console.log(this.producto["0"]);
   }
 }
