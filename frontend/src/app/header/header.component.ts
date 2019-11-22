@@ -9,15 +9,14 @@ import { AuthenticationService } from '../authentication.service';
 export class HeaderComponent implements OnInit {
   sw: any;
   constructor(private head: AuthenticationService) {
-
+    this.sw = this.head.isTokenValid();
+    console.log(this.sw);
 
   }
 
   ngOnInit() {
-   
     this.sw = this.head.isTokenValid();
- 
-
+    console.log(this.sw);
   }
 
 }

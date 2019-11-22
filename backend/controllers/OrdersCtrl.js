@@ -13,8 +13,34 @@ orderCtrl.create = async (req, res) =>{
         vendorId: req.bdy.vendorId
     });
 
-    await requests.post("http://localhost:8080/ORDERS/DETAILS/create/", {json: {orderId: order._id , details : req.body.details}} );
+    await requests.post("http://localhost:8080/ORDERS/DETAILS/create/", {json: {orderId: order._id , details : req.body.products}} );
     
+}
+
+orderCtrl.fetchS = async (req, res) =>{
+    let data = await orderModel.find({vendorId: req.body.SalesPersonId});
+    await requests.post("http://localhost:8080/ORDERS/DETAILS/fetch/", {json: {orderId: data.orderId}},function (err, es, json) {
+        if (err) {
+          throw err;
+        }
+            res.json({
+                'orders':data,
+                'orderDet':json
+            });
+      });
+}
+
+orderCtrl.fetchC = async (req, res) =>{
+    let data = await orderModel.find({clientId: req.body.clientId});
+    await requests.post("http://localhost:8080/ORDERS/DETAILS/fetch/", {json: {orderId: data.orderId}},function (err, es, json) {
+        if (err) {
+          throw err;
+        }
+        res.json({
+            'orders':data,
+            'orderDet':json
+        });
+      } );
 }
 
 module.exports = orderCtrl;
